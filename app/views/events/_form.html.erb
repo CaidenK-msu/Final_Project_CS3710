@@ -1,0 +1,68 @@
+<%= form_with(model: event, local: true) do |form| %>
+  <% if event.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
+      <ul>
+        <% event.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :title, "Event Title" %>
+    <%= form.text_field :title, class: "form-control", placeholder: "Enter the event title" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :description, "Event Description" %>
+    <%= form.text_area :description, class: "form-control", placeholder: "Describe your event in detail" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :date, "Event Date and Time" %>
+    <%= form.datetime_select :date, class: "form-control" %>
+  </div>
+
+  <div class="form-actions">
+    <%= form.submit class: "btn btn-primary" %>
+    <%= link_to "Cancel", events_path, class: "btn btn-secondary" %>
+  </div>
+<% end %>
+
+<style>
+  .form-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    background: white;
+    padding: 1.5rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  .form-control {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+
+  .form-actions {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .btn-primary {
+    background-color: #007bff;
+  }
+
+  .btn-primary:hover {
+    background-color: #0056b3;
+  }
+</style>

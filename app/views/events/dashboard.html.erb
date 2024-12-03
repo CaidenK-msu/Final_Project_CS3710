@@ -1,0 +1,63 @@
+<div class="dashboard">
+    <h2>Your Events</h2>
+    <%= link_to "Create New Event", new_event_path, class: "btn" %>
+    <% if @events.any? %>
+      <div class="events-list">
+        <% @events.each do |event| %>
+          <div class="event-card">
+            <h3><%= link_to event.title, event_path(event) %></h3>
+            <p><strong>Date:</strong> <%= event.date.strftime("%B %d, %Y %H:%M") %></p>
+            <p><%= truncate(event.description, length: 100) %></p>
+            <div class="actions">
+              <%= link_to "Edit", edit_event_path(event), class: "btn" %>
+              <%= link_to "Delete", event_path(event), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <p>You have no events yet. <%= link_to "Create one now", new_event_path %>.</p>
+    <% end %>
+  </div>
+  
+  <style>
+    .dashboard {
+      text-align: center;
+    }
+  
+    .btn {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      color: white;
+      background-color: #007bff;
+      text-decoration: none;
+      border-radius: 5px;
+      margin: 0.5rem;
+    }
+  
+    .btn:hover {
+      background-color: #0056b3;
+    }
+  
+    .btn-danger {
+      background-color: #dc3545;
+    }
+  
+    .btn-danger:hover {
+      background-color: #c82333;
+    }
+  
+    .events-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+  
+    .event-card {
+      background-color: white;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+  </style>

@@ -1,15 +1,47 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>FinalProjectCs3710</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Event Planner App</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <!-- Include the stylesheet -->
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-  </head>
 
+    <!-- Include JavaScript (use type: "module" for modern setups like ESBuild) -->
+    <%= javascript_include_tag "application", type: "module", "data-turbo-track": "reload" %>
+  </head>
   <body>
-    <%= yield %>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+          <a class="navbar-brand" href="<%= root_path %>">Event Planner</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div class="container mt-4">
+      <!-- Flash Messages -->
+      <% if flash[:notice] %>
+        <div class="alert alert-success"><%= flash[:notice] %></div>
+      <% end %>
+      <% if flash[:alert] %>
+        <div class="alert alert-danger"><%= flash[:alert] %></div>
+      <% end %>
+
+      <!-- Main Content -->
+      <%= yield %>
+    </div>
+
+    <footer class="text-center mt-4">
+      <p>&copy; <%= Date.today.year %> Event Planner App</p>
+    </footer>
   </body>
 </html>
