@@ -27,6 +27,18 @@
       </nav>
     </header>
 
+    <header>
+      <nav>
+        <% if logged_in? %>
+          <%= link_to "Profile", profile_path, class: "nav-link" %>
+          <%= link_to "Log Out", logout_path, method: :delete, class: "btn btn-danger" %>
+        <% else %>
+          <%= link_to "Log In", login_path, class: "nav-link" %>
+          <%= link_to "Sign Up", signup_path, class: "nav-link" %>
+        <% end %>
+      </nav>
+    </header>
+
     <div class="container mt-4">
       <!-- Flash Messages -->
       <% if flash[:notice] %>

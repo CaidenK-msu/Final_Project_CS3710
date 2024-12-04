@@ -1,5 +1,8 @@
 class EventsController < ApplicationController
   before_action :require_login, except: [:index, :show] # Adjust the actions here as necessary
+  
+  
+  before_action :set_event, only: %i[edit update show destroy]
 
   def index
     @events = Event.all.order(date: :asc)
@@ -36,10 +39,30 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    @event = current_user.events.find(params[:id])
+    @event = Event.find(params[:id])
     @event.destroy
-    redirect_to events_path, notice: "Event deleted successfully!"
+    redirect_to events_path, notice: 'Event was successfully deleted.'
+    end
+
+
+  def edit
+    # @event should already be set by the before_action
   end
+
+  def update
+    if @event.update(event_params)
+      redirect_to @event, notice: "Event was successfully updated."
+    else
+      render :edit
+    end
+  end
+
+  private
+
+  def set_event
+    @event = Event.find(params[:id])  # Finds the event based on the ID passed in the URL
+  end
+
 
   private
 
